@@ -2,14 +2,15 @@ from setuptools import setup
 
 
 def readme():
-    with open('README.rst') as f:
+    with open('README.md') as f:
         return f.read()
 
 
 setup(
     name='musicsync',
-    version='0.3',
+    version='0.3.1',
     description='Sync songs between music streaming services',
+    long_description_content_type='text/markdown',
     long_description=readme(),
     url='https://github.com/moxuz/musicsync',
     author='Chris Pouliot',
