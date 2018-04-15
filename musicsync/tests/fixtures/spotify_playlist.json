@@ -1,0 +1,215 @@
+{
+  "collaborative" : false,
+  "description" : "Your weekly mixtape of fresh music. Enjoy new discoveries and deep cuts chosen just for you. Updated every Monday, so save your favorites!",
+  "external_urls" : {
+    "spotify" : "https://open.spotify.com/notreal"
+  },
+  "followers" : {
+    "href" : null,
+    "total" : 1
+  },
+  "href" : "https://api.spotify.com/v1/users/spotify/playlists/notreal",
+  "id" : "37i9dQZEVXcDMZefn1RCXV",
+  "images" : [ {
+    "height" : null,
+    "url" : "https://pl.scdn.co/images/pl/default/notreal",
+    "width" : null
+  } ],
+  "name" : "Discover Weekly",
+  "owner" : {
+    "display_name" : "Spotify",
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/user/spotify"
+    },
+    "href" : "https://api.spotify.com/v1/users/spotify",
+    "id" : "spotify",
+    "type" : "user",
+    "uri" : "spotify:user:spotify"
+  },
+  "primary_color" : null,
+  "public" : false,
+  "snapshot_id" : "abc",
+  "tracks" : {
+    "href" : "https://api.spotify.com/v1/users/spotify/playlists/notreal/tracks?offset=0&limit=100",
+    "items" : [ {
+      "added_at" : "2018-04-09T07:00:00Z",
+      "added_by" : {
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/user/"
+        },
+        "href" : "https://api.spotify.com/v1/users/",
+        "id" : "",
+        "type" : "user",
+        "uri" : "spotify:user:"
+      },
+      "is_local" : false,
+      "primary_color" : null,
+      "track" : {
+        "album" : {
+          "album_type" : "single",
+          "artists" : [ {
+            "external_urls" : {
+              "spotify" : "https://open.spotify.com/artist/2CXaub1yYrSk6ruDtOx6LZ"
+            },
+            "href" : "https://api.spotify.com/v1/artists/2CXaub1yYrSk6ruDtOx6LZ",
+            "id" : "2CXaub1yYrSk6ruDtOx6LZ",
+            "name" : "Astronauts, etc.",
+            "type" : "artist",
+            "uri" : "spotify:artist:2CXaub1yYrSk6ruDtOx6LZ"
+          } ],
+          "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IS", "IT", "JP", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SK", "SV", "TH", "TR", "TW", "US", "UY", "VN", "ZA" ],
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/album/5cKv86pqQO8Gu6AfqPuChS"
+          },
+          "href" : "https://api.spotify.com/v1/albums/5cKv86pqQO8Gu6AfqPuChS",
+          "id" : "5cKv86pqQO8Gu6AfqPuChS",
+          "images" : [ {
+            "height" : 640,
+            "url" : "https://i.scdn.co/image/eb06206c7bfe83d530cd5c9e45613f0ef1015a34",
+            "width" : 640
+          }, {
+            "height" : 300,
+            "url" : "https://i.scdn.co/image/ad1d85051842fdba39a644283e3ff3968f7f0f1f",
+            "width" : 300
+          }, {
+            "height" : 64,
+            "url" : "https://i.scdn.co/image/a9cc45210407024f60b56dfec5b723e7ace083fe",
+            "width" : 64
+          } ],
+          "name" : "Sadie",
+          "release_date" : "2014-09-23",
+          "release_date_precision" : "day",
+          "type" : "album",
+          "uri" : "spotify:album:5cKv86pqQO8Gu6AfqPuChS"
+        },
+        "artists" : [ {
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/artist/2CXaub1yYrSk6ruDtOx6LZ"
+          },
+          "href" : "https://api.spotify.com/v1/artists/2CXaub1yYrSk6ruDtOx6LZ",
+          "id" : "2CXaub1yYrSk6ruDtOx6LZ",
+          "name" : "Astronauts, etc.",
+          "type" : "artist",
+          "uri" : "spotify:artist:2CXaub1yYrSk6ruDtOx6LZ"
+        } ],
+        "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IS", "IT", "JP", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SK", "SV", "TH", "TR", "TW", "US", "UY", "VN", "ZA" ],
+        "disc_number" : 1,
+        "duration_ms" : 197258,
+        "episode" : false,
+        "explicit" : false,
+        "external_ids" : {
+          "isrc" : "USYAW1400009"
+        },
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/track/1e3L8jHzIhgfEkKpaGJ1Bn"
+        },
+        "href" : "https://api.spotify.com/v1/tracks/1e3L8jHzIhgfEkKpaGJ1Bn",
+        "id" : "1e3L8jHzIhgfEkKpaGJ1Bn",
+        "is_local" : false,
+        "name" : "Sadie",
+        "popularity" : 26,
+        "preview_url" : "https://p.scdn.co/mp3-preview/1e71f4f2930280dcca9e76268b7890176f8005c9?cid=838ce87489134eb09f1ccba0470c094f",
+        "track" : true,
+        "track_number" : 1,
+        "type" : "track",
+        "uri" : "spotify:track:1e3L8jHzIhgfEkKpaGJ1Bn"
+      },
+      "video_thumbnail" : {
+        "url" : null
+      }
+    }, {
+      "added_at" : "2018-04-09T07:00:00Z",
+      "added_by" : {
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/user/"
+        },
+        "href" : "https://api.spotify.com/v1/users/",
+        "id" : "",
+        "type" : "user",
+        "uri" : "spotify:user:"
+      },
+      "is_local" : false,
+      "primary_color" : null,
+      "track" : {
+        "album" : {
+          "album_type" : "single",
+          "artists" : [ {
+            "external_urls" : {
+              "spotify" : "https://open.spotify.com/artist/1z2hZ30uBrGhUPnshm9DmZ"
+            },
+            "href" : "https://api.spotify.com/v1/artists/1z2hZ30uBrGhUPnshm9DmZ",
+            "id" : "1z2hZ30uBrGhUPnshm9DmZ",
+            "name" : "The Flavr Blue",
+            "type" : "artist",
+            "uri" : "spotify:artist:1z2hZ30uBrGhUPnshm9DmZ"
+          } ],
+          "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IS", "IT", "JP", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SK", "SV", "TH", "TR", "TW", "US", "UY", "VN", "ZA" ],
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/album/1YlbPxDejHF5iqXPYxuNWQ"
+          },
+          "href" : "https://api.spotify.com/v1/albums/1YlbPxDejHF5iqXPYxuNWQ",
+          "id" : "1YlbPxDejHF5iqXPYxuNWQ",
+          "images" : [ {
+            "height" : 640,
+            "url" : "https://i.scdn.co/image/9d3c03df95b7e19f20805bf86327623d038fb61b",
+            "width" : 640
+          }, {
+            "height" : 300,
+            "url" : "https://i.scdn.co/image/cee40e709777feb8298babcdee5fae0f85169925",
+            "width" : 300
+          }, {
+            "height" : 64,
+            "url" : "https://i.scdn.co/image/cfd0845e2b65fda0f36a47a8409aef4e349c02fa",
+            "width" : 64
+          } ],
+          "name" : "Bright Vices (Spotify Exclusive Version)",
+          "release_date" : "2013-10-15",
+          "release_date_precision" : "day",
+          "type" : "album",
+          "uri" : "spotify:album:1YlbPxDejHF5iqXPYxuNWQ"
+        },
+        "artists" : [ {
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/artist/1z2hZ30uBrGhUPnshm9DmZ"
+          },
+          "href" : "https://api.spotify.com/v1/artists/1z2hZ30uBrGhUPnshm9DmZ",
+          "id" : "1z2hZ30uBrGhUPnshm9DmZ",
+          "name" : "The Flavr Blue",
+          "type" : "artist",
+          "uri" : "spotify:artist:1z2hZ30uBrGhUPnshm9DmZ"
+        } ],
+        "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IS", "IT", "JP", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SK", "SV", "TH", "TR", "TW", "US", "UY", "VN", "ZA" ],
+        "disc_number" : 1,
+        "duration_ms" : 236360,
+        "episode" : false,
+        "explicit" : false,
+        "external_ids" : {
+          "isrc" : "USA2P1365187"
+        },
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/track/4ytjZReEPNZShU1iICkpGA"
+        },
+        "href" : "https://api.spotify.com/v1/tracks/4ytjZReEPNZShU1iICkpGA",
+        "id" : "4ytjZReEPNZShU1iICkpGA",
+        "is_local" : false,
+        "name" : "We Can Go Blind",
+        "popularity" : 31,
+        "preview_url" : "https://p.scdn.co/mp3-preview/2492de3656ef7dbd7aabbe22015306bc7704d2d3?cid=838ce87489134eb09f1ccba0470c094f",
+        "track" : true,
+        "track_number" : 3,
+        "type" : "track",
+        "uri" : "spotify:track:4ytjZReEPNZShU1iICkpGA"
+      },
+      "video_thumbnail" : {
+        "url" : null
+      }
+    }],
+    "limit" : 100,
+    "next" : null,
+    "offset" : 0,
+    "previous" : null,
+    "total" : 30
+  },
+  "type" : "playlist",
+  "uri" : "spotify:user:spotify:playlist:notreal"
+}

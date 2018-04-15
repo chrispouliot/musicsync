@@ -8,13 +8,14 @@ def readme():
 
 setup(
     name='musicsync',
-    version='0.2',
+    version='0.3',
     description='Sync songs between music streaming services',
-    long_desscription=readme(),
+    long_description=readme(),
     url='https://github.com/moxuz/musicsync',
     author='Chris Pouliot',
     author_email='me@chrispouliot.codes',
     license='MIT',
+    test_suite='musicsync.tests',
     packages=['musicsync'],
     install_requires=[
         "appdirs",
