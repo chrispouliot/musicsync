@@ -2,7 +2,7 @@ from .config import logger
 from .musicclient import GPMClient, SpotifyClient
 
 
-def copy(playlist_titles):
+def spotify_gpm_copy(playlist_titles):
     if not playlist_titles:
         logger.warning("No playlists entered, exiting..")
         return

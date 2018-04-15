@@ -4,6 +4,7 @@ from requests.auth import HTTPBasicAuth
 from datetime import datetime, timedelta
 
 from .config import logger, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_USER_ID
+from .exceptions import AuthError, ClientError
 from .serializers import Playlist
 
 
@@ -30,9 +31,7 @@ class Spotify(object):
         }
 
         r = requests.post(AUTHORIZE_URL, auth=HTTPBasicAuth(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET), data=data)
-
-        if r.status_code >= 400:
-            raise Exception(f'HTTP Error {r.status_code}: {r.text}')
+        self._raise_for_error(r)
 
         body = r.json()
         expiry = body.get("expires_in")
@@ -43,7 +42,7 @@ class Spotify(object):
                 "Failed to authenticate with Spotify. Invalid tokens returned. Status code %s",
                 r.status_code
             )
-            raise Exception("Unable to fulfill your request")
+            self._raise_for_error(r)
 
         token_expiry = datetime.now() + timedelta(seconds=expiry)
 
@@ -54,11 +53,16 @@ class Spotify(object):
         headers = {"Authorization": "Bearer {token}".format(token=token)}
 
         r = requests.get(url, headers=headers)
-
-        if r.status_code >= 400:
-            raise Exception(f'HTTP Error {r.status_code}: {r.text}')
+        self._raise_for_error(r)
 
         return r.json()
+
+    def _raise_for_error(self, req):
+        code, text = req.status_code, req.text
+        if code >= 400:
+            if code == 401 or code == 403:
+                raise AuthError(f'Failed to authenticate with Spotify: {text}')
+            raise ClientError(f'Spotify Error {code}: {text}')
 
     def get_playlist(self, name):
         user_playlists = self._get(PLAYLISTS_URL)

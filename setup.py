@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='musicsync',
-    version='0.1',
+    version='0.2',
     description='Sync songs between music streaming services',
     long_desscription=readme(),
     url='https://github.com/moxuz/musicsync',
