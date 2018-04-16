@@ -13,25 +13,47 @@ AUTHORIZE_URL = "https://accounts.spotify.com/api/token"
 PLAYLISTS_URL = f"https://api.spotify.com/v1/users/{SPOTIFY_USER_ID}/playlists"
 
 
-class Spotify(object):
+def _raise_for_error(req):
+    code, text = req.status_code, req.text
+    if code >= 400:
+        if code == 401 or code == 403:
+            raise AuthError(f'Failed to authenticate with Spotify: {text}')
+        raise ClientError(f'Spotify Error {code}: {text}')
+
+
+class SpotifyClientAuth:
+    _client_secret = ""
+    _client_id = ""
     _granted_token = ""
     _token_expiry_date = datetime.now()
 
-    def _get_auth(self, re_auth=False):
+    _session = None
 
-        if self._token_expiry_date > datetime.now() and not re_auth:
-            return self._granted_token
+    def __init__(self, client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET):
+        if not client_id and client_secret:
+            raise AuthError("Invalid auth credentials provided")
+        self._client_id, self._client_secret = client_id, client_secret
 
-        self._granted_token, self._token_expiry_date = self._authenticate()
-        return self._granted_token
+    @property
+    def session(self):
+        if not self._session:
+            self._session = requests.Session()
+        self._session.headers.update({
+            "Authorization": "Bearer {token}".format(token=self._get_auth())
+        })
+        return self._session
 
     def _authenticate(self):
         data = {
             "grant_type": "client_credentials"
         }
 
-        r = requests.post(AUTHORIZE_URL, auth=HTTPBasicAuth(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET), data=data)
-        self._raise_for_error(r)
+        r = self._session.post(
+            AUTHORIZE_URL,
+            auth=HTTPBasicAuth(self._client_id, self._client_secret),
+            data=data
+        )
+        _raise_for_error(r)
 
         body = r.json()
         expiry = body.get("expires_in")
@@ -42,27 +64,32 @@ class Spotify(object):
                 "Failed to authenticate with Spotify. Invalid tokens returned. Status code %s",
                 r.status_code
             )
-            self._raise_for_error(r)
+            _raise_for_error(r)
 
         token_expiry = datetime.now() + timedelta(seconds=expiry)
 
         return token, token_expiry
 
-    def _get(self, url):
-        token = self._get_auth()
-        headers = {"Authorization": "Bearer {token}".format(token=token)}
+    def _get_auth(self, re_auth=False):
 
-        r = requests.get(url, headers=headers)
-        self._raise_for_error(r)
+        if self._token_expiry_date > datetime.now() and not re_auth:
+            return self._granted_token
+
+        self._granted_token, self._token_expiry_date = self._authenticate()
+        return self._granted_token
+
+
+class Spotify:
+    _auth = None
+
+    def __init__(self, auth):
+        self._auth = auth
+
+    def _get(self, url):
+        r = self._auth.session.get(url)
+        _raise_for_error(r)
 
         return r.json()
-
-    def _raise_for_error(self, req):
-        code, text = req.status_code, req.text
-        if code >= 400:
-            if code == 401 or code == 403:
-                raise AuthError(f'Failed to authenticate with Spotify: {text}')
-            raise ClientError(f'Spotify Error {code}: {text}')
 
     def get_playlist(self, name):
         user_playlists = self._get(PLAYLISTS_URL)

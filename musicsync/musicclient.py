@@ -1,8 +1,8 @@
 from .gpm import GPM
-from .spotify import Spotify
+from .spotify import Spotify, SpotifyClientAuth
 
 
-class MusicClient(object):
+class MusicClient:
     _client = None
 
     def get_playlist(self, name):
@@ -30,8 +30,9 @@ class MusicClient(object):
 
 class SpotifyClient(MusicClient):
 
-    def __init__(self):
-        self._client = Spotify()
+    def __init__(self, auth=SpotifyClientAuth):
+        # Default to using Client Authentication from environment variables
+        self._client = Spotify(auth=auth())
         super()
 
 

@@ -1,4 +1,4 @@
-class Song(object):
+class Song:
     title = ''
     artist = ''
     album = ''
@@ -32,7 +32,7 @@ class Song(object):
         )
 
 
-class Playlist(object):
+class Playlist:
     songs = []
     title = ''
     description = ''

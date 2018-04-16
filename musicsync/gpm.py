@@ -6,7 +6,7 @@ from .serializers import Playlist
 from .utils import is_match
 
 
-class GPM(object):
+class GPM:
     _api = None
 
     def __init__(self):
