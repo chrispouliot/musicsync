@@ -1,5 +1,6 @@
+from .auth import SpotifyClientAuth
 from .gpm import GPM
-from .spotify import Spotify, SpotifyClientAuth
+from .spotify import Spotify
 
 
 class MusicClient:
@@ -31,7 +32,7 @@ class MusicClient:
 class SpotifyClient(MusicClient):
 
     def __init__(self, auth=SpotifyClientAuth):
-        # Default to using Client Authentication from environment variables
+        # Default to using Client Authentication, pulling from environment variables
         self._client = Spotify(auth=auth())
         super()
 
