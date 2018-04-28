@@ -4,7 +4,16 @@ from .spotify import Spotify
 
 
 class MusicClient:
+    DEFAULT_AUTH = None
+    CLIENT = None
+
     _client = None
+
+    def __init__(self, auth=None):
+        if not auth:
+            # Can't initialize as default arg because it would require env vars on import
+            auth = self.DEFAULT_AUTH()
+        self._client = self.CLIENT(auth)
 
     def get_playlist(self, name):
         '''
@@ -30,14 +39,10 @@ class MusicClient:
 
 
 class SpotifyClient(MusicClient):
-
-    def __init__(self, auth=SpotifyClientAuth()):
-        self._client = Spotify(auth)
-        super()
+    DEFAULT_AUTH = SpotifyClientAuth
+    CLIENT = Spotify
 
 
 class GPMClient(MusicClient):
-
-    def __init__(self, auth=GPMClientAuth()):
-        self._client = GPM(auth)
-        super()
+    DEFAULT_AUTH = GPMClientAuth
+    CLIENT = GPM

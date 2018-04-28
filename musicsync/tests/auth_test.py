@@ -28,4 +28,4 @@ class TestOAuth(TestCase):
             f"client_id={client_id}&response_type=code&redirect_uri={redirect_uri}&state={state}"
         req = SpotifyOAuth.get_oauth_req(client_id, redirect_uri, state)
 
-        self.assertEqual(expected_url, req.prepare().url)
+        self.assertEqual(expected_url, req.url)

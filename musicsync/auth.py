@@ -108,7 +108,7 @@ class SpotifyOAuth(BaseSpotifyAuth):
             raise AuthError("Invalid auth credentials provided")
         self._client_id = client_id
         self._client_secret = client_secret
-        self._code = code
+        self._oauth_code = code
         self._redirect_uri = redirect_uri
 
     @property
@@ -133,7 +133,7 @@ class SpotifyOAuth(BaseSpotifyAuth):
             'GET',
             OAUTH_USER_REQUEST_AUTHORIZE_URL,
             params=payload
-        )
+        ).prepare()
 
     def _get_auth(self, re_auth=False):
         token_expired = self._token_expiry_date > datetime.now()
@@ -152,7 +152,7 @@ class SpotifyOAuth(BaseSpotifyAuth):
 
         if not refresh:
             data['grant_type'] = 'authorization_code'
-            data['code'] = self.code,
+            data['code'] = self._oauth_code,
 
         r = self._session.post(
             AUTHORIZE_TOKEN_URL,
