@@ -5,22 +5,34 @@ from datetime import datetime, timedelta
 from requests.auth import HTTPBasicAuth
 from requests import Request
 
-from .config import logger, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
+from .config import logger, \
+    GPM_APP_PASSWORD, \
+    GPM_EMAIL_ADDRESS, \
+    SPOTIFY_CLIENT_ID, \
+    SPOTIFY_CLIENT_SECRET
 from .exceptions import AuthError
 from .utils import _raise_for_error
 
-BASE_URL = "https://api.spotify.com/v1"
-AUTHORIZE_TOKEN_URL = "https://accounts.spotify.com/api/token"
-OAUTH_USER_REQUEST_AUTHORIZE_URL = "https://accounts.spotify.com/authorize/"
+BASE_URL = 'https://api.spotify.com/v1'
+AUTHORIZE_TOKEN_URL = 'https://accounts.spotify.com/api/token'
+OAUTH_USER_REQUEST_AUTHORIZE_URL = 'https://accounts.spotify.com/authorize/'
 
 
-class BaseAuth:
+class BaseSpotifyAuth:
     @property
     def session(self):
         raise NotImplementedError()
 
 
-class SpotifyClientAuth(BaseAuth):
+class GPMClientAuth:
+    email = ""
+    password = ""
+
+    def __init__(self, email=GPM_EMAIL_ADDRESS, password=GPM_APP_PASSWORD):
+        self.email, self.password = email, password
+
+
+class SpotifyClientAuth(BaseSpotifyAuth):
     _client_secret = ""
     _client_id = ""
     _granted_token = ""
@@ -28,7 +40,7 @@ class SpotifyClientAuth(BaseAuth):
     _session = None
 
     def __init__(self, client_id=SPOTIFY_CLIENT_ID, client_secret=SPOTIFY_CLIENT_SECRET):
-        if not client_id and client_secret:
+        if not (client_id and client_secret):
             raise AuthError("Invalid auth credentials provided")
         self._client_id, self._client_secret = client_id, client_secret
 
@@ -37,7 +49,7 @@ class SpotifyClientAuth(BaseAuth):
         if not self._session:
             self._session = requests.Session()
         self._session.headers.update({
-            "Authorization": "Bearer {token}".format(token=self._get_auth())
+            'Authorization': f"Bearer {self._get_auth()}"
         })
         return self._session
 
@@ -51,7 +63,7 @@ class SpotifyClientAuth(BaseAuth):
 
     def _authenticate(self):
         data = {
-            "grant_type": "client_credentials"
+            'grant_type': 'client_credentials'
         }
 
         r = self._session.post(
@@ -62,8 +74,8 @@ class SpotifyClientAuth(BaseAuth):
         _raise_for_error(r)
 
         body = r.json()
-        expiry = body.get("expires_in")
-        token = body.get("access_token")
+        expiry = body.get('expires_in')
+        token = body.get('access_token')
 
         if not expiry or not token:
             logger.warning(
@@ -77,7 +89,7 @@ class SpotifyClientAuth(BaseAuth):
         return token, token_expiry
 
 
-class SpotifyOAuth(BaseAuth):
+class SpotifyOAuth(BaseSpotifyAuth):
     _client_secret = ""
     _client_id = ""
     _oauth_code = ""
@@ -90,8 +102,8 @@ class SpotifyOAuth(BaseAuth):
             self,
             client_id=SPOTIFY_CLIENT_ID,
             client_secret=SPOTIFY_CLIENT_SECRET,
-            code="",
-            redirect_uri=""):
+            code='',
+            redirect_uri=''):
         if not (client_id and client_secret and code and redirect_uri):
             raise AuthError("Invalid auth credentials provided")
         self._client_id = client_id
@@ -104,13 +116,13 @@ class SpotifyOAuth(BaseAuth):
         if not self._session:
             self._session = requests.Session()
         self._session.headers.update({
-            "Authorization": "Bearer {token}".format(token=self._get_auth())
+            'Authorization': f"Bearer {self._get_auth()}"
         })
         return self._session
 
     # TODO: Could make this a non-static func? How keep the Spotify client using this Auth after a redirect?
     @staticmethod
-    def get_oauth_url(client_id, redirect_uri, state):
+    def get_oauth_req(client_id, redirect_uri, state):
         payload = {
             'client_id': client_id,
             'response_type': 'code',
@@ -123,7 +135,6 @@ class SpotifyOAuth(BaseAuth):
             params=payload
         )
 
-    # TODO: Much code repetition from here to EOF with other auth class
     def _get_auth(self, re_auth=False):
         token_expired = self._token_expiry_date > datetime.now()
         if token_expired and not re_auth:
@@ -134,15 +145,14 @@ class SpotifyOAuth(BaseAuth):
 
     def _authenticate(self, refresh=False):
         data = {
-            "grant_type": "authorization_code",
-            "code": self.code,
-            "redirect_uri": self._redirect_uri
+            'grant_type': 'refresh_token',
+            'refresh_token': self._refresh_token,
+            'redirect_uri': self._redirect_uri
         }
-        # TODO: Make this ^ v cleaner?
-        if refresh:
-            data["grant_type"] = "refresh_token"
-            data["refresh_token"] = self._refresh_token
-            del data["code"]
+
+        if not refresh:
+            data['grant_type'] = 'authorization_code'
+            data['code'] = self.code,
 
         r = self._session.post(
             AUTHORIZE_TOKEN_URL,
@@ -152,9 +162,9 @@ class SpotifyOAuth(BaseAuth):
         _raise_for_error(r)
 
         body = r.json()
-        expiry = body.get("expires_in")
-        token = body.get("access_token")
-        refresh_token = body.get("refresh_token")
+        expiry = body.get('expires_in')
+        token = body.get('access_token')
+        refresh_token = body.get('refresh_token')
 
         if not (expiry and token and refresh_token):
             logger.warning(

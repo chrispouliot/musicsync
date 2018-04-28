@@ -1,6 +1,5 @@
 from gmusicapi import Mobileclient
 
-from .config import GPM_APP_PASSWORD, GPM_EMAIL_ADDRESS
 from .exceptions import AuthError
 from .serializers import Playlist
 from .utils import is_match
@@ -9,9 +8,9 @@ from .utils import is_match
 class GPM:
     _api = None
 
-    def __init__(self):
+    def __init__(self, auth):
         self._api = Mobileclient(debug_logging=False)
-        if not self._api.login(GPM_EMAIL_ADDRESS, GPM_APP_PASSWORD, Mobileclient.FROM_MAC_ADDRESS):
+        if not self._api.login(auth.email, auth.password, Mobileclient.FROM_MAC_ADDRESS):
             raise AuthError("Failed to authenticate with GPM")
 
     def _delete_playlist(self, playlist_id):

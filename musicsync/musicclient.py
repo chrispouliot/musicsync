@@ -1,4 +1,4 @@
-from .auth import SpotifyClientAuth
+from .auth import GPMClientAuth, SpotifyClientAuth
 from .gpm import GPM
 from .spotify import Spotify
 
@@ -31,14 +31,13 @@ class MusicClient:
 
 class SpotifyClient(MusicClient):
 
-    def __init__(self, auth=SpotifyClientAuth):
-        # Default to using Client Authentication, pulling from environment variables
-        self._client = Spotify(auth=auth())
+    def __init__(self, auth=SpotifyClientAuth()):
+        self._client = Spotify(auth)
         super()
 
 
 class GPMClient(MusicClient):
 
-    def __init__(self):
-        self._client = GPM()
+    def __init__(self, auth=GPMClientAuth()):
+        self._client = GPM(auth)
         super()
