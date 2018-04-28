@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='musicsync',
-    version='0.3.1',
+    version='0.3.2',
     description='Sync songs between music streaming services',
     long_description_content_type='text/markdown',
     long_description=readme(),
