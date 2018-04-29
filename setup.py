@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='musicsync',
-    version='0.4.2',
+    version='0.4.3',
     description='Sync songs between music streaming services',
     long_description_content_type='text/markdown',
     long_description="from musicsync import spotify_gpm_copy  spotify_gpm_copy([\"Discover Weekly\"])",

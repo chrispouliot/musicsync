@@ -122,7 +122,7 @@ class SpotifyOAuth(BaseSpotifyAuth):
 
     # TODO: Could make this a non-static func? How keep the Spotify client using this Auth after a redirect?
     @staticmethod
-    def get_oauth_req(client_id, redirect_uri, state):
+    def get_oauth_url(client_id, redirect_uri, state):
         payload = {
             'client_id': client_id,
             'response_type': 'code',
@@ -133,7 +133,7 @@ class SpotifyOAuth(BaseSpotifyAuth):
             'GET',
             OAUTH_USER_REQUEST_AUTHORIZE_URL,
             params=payload
-        ).prepare()
+        ).prepare().url
 
     def _get_auth(self, re_auth=False):
         token_expired = self._token_expiry_date > datetime.now()
