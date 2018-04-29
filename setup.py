@@ -1,17 +1,12 @@
 from setuptools import setup
 
 
-def readme():
-    with open('README.md') as f:
-        return f.read()
-
-
 setup(
     name='musicsync',
-    version='0.4.0',
+    version='0.4.2',
     description='Sync songs between music streaming services',
     long_description_content_type='text/markdown',
-    long_description=readme(),
+    long_description="from musicsync import spotify_gpm_copy  spotify_gpm_copy([\"Discover Weekly\"])",
     url='https://github.com/moxuz/musicsync',
     author='Chris Pouliot',
     author_email='me@chrispouliot.codes',
